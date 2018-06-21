@@ -28,4 +28,25 @@ public class BlogController {
         return blogMockedData.searchBlogs(searchTerm);
     }
 
+    @PostMapping("/blog")
+    public Blog create(@RequestBody Map<String, String> body) {
+
+        int id = Integer.parseInt(body.get("id"));
+        String title = body.get("title");
+        String content = body.get("content");
+
+        return blogMockedData.createBlog(id, title, content);
+
+    }
+
+    @PutMapping("/blog/{id}")
+    public Blog update(@PathVariable String id, @RequestBody Map<String, String> body) {
+        int blogId = Integer.parseInt(id);
+        String title = body.get("title");
+        String content  = body.get("content");
+
+        return blogMockedData.updateBlog(blogId, title, content);
+
+    }
+
 }
