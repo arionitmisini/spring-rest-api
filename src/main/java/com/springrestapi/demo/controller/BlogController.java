@@ -1,18 +1,37 @@
 package com.springrestapi.demo.controller;
 
-import com.springrestapi.demo.BlogMockedData;
 import com.springrestapi.demo.models.Blog;
+import com.springrestapi.demo.repository.BlogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class BlogController {
 
-    BlogMockedData blogMockedData = BlogMockedData.getInstance();
+    @Autowired
+    private BlogRepository blogRepository;
 
     @GetMapping("/blog")
+    public List<Blog> index(){
+        return blogRepository.findAll();
+    }
+
+    @GetMapping("/blog/{id}")
+    public Optional<Blog> show(@PathVariable int id){
+        return blogRepository.findById(id);
+    }
+
+    @PostMapping("/blog/search")
+    public List<Blog> search(@RequestBody Map<String, String> body){
+        String searchTerm = body.get("text");
+        return blogRepository.findByTitleContainingOrContentContaining(searchTerm, searchTerm);
+    }
+
+    /*@GetMapping("/blog")
     public List<Blog> index() {
         return blogMockedData.fetchBlogs();
     }
@@ -48,5 +67,5 @@ public class BlogController {
         return blogMockedData.updateBlog(blogId, title, content);
 
     }
-
+*/
 }

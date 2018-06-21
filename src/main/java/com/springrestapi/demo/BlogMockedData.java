@@ -19,7 +19,7 @@ public class BlogMockedData {
     }
 
 
-    public BlogMockedData(){
+   /* public BlogMockedData(){
         blogs = new ArrayList<Blog>();
         blogs.add(new Blog(1, "Go up, up and away with your Google Assistant",
                 "With holiday travel coming up, and 2018 just around the corner, " +
@@ -107,6 +107,6 @@ public class BlogMockedData {
             blogs.remove(blogIndex);
         }
         return true;
-    }
+    }*/
 
 }

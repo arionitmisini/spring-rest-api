@@ -1,9 +1,15 @@
 package com.springrestapi.demo.models;
 
-public class Blog {
+import javax.persistence.*;
 
+@Entity
+public class Blog implements Comparable<Blog>{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(name="title")
     private String title;
+    @Column(name="content")
     private String content;
 
     public Blog(){
@@ -51,5 +57,9 @@ public class Blog {
                 '}';
     }
 
+    @Override
+    public int compareTo(Blog o) {
+        return 0;
+    }
 }
 
