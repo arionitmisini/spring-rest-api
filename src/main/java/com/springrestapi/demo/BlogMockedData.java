@@ -59,6 +59,54 @@ public class BlogMockedData {
         return null;
     }
 
+    // Search blog by text
+    public List<Blog> searchBlogs(String searchTerm) {
+        List<Blog> searchedBlogs = new ArrayList<Blog>();
+        for(Blog b: blogs) {
+            if(b.getTitle().toLowerCase().contains(searchTerm.toLowerCase()) || b.getContent().toLowerCase().contains(searchTerm.toLowerCase())) {
+                searchedBlogs.add(b);
+            }
+        }
 
+        return searchedBlogs;
+    }
+
+    // Create blog
+    public Blog createBlog(int id, String title, String content) {
+        Blog newBlog = new Blog(id, title, content);
+        blogs.add(newBlog);
+        return newBlog;
+    }
+
+    // Update blog
+    public Blog updateBlog(int id, String title, String content) {
+        for(Blog b: blogs) {
+            if(b.getId() == id) {
+                int blogIndex = blogs.indexOf(b);
+                b.setTitle(title);
+                b.setContent(content);
+                blogs.set(blogIndex, b);
+                return b;
+            }
+
+        }
+
+        return null;
+    }
+
+    // Delete blog by id
+    public boolean delete(int id){
+        int blogIndex = -1;
+        for(Blog b: blogs) {
+            if(b.getId() == id) {
+                blogIndex = blogs.indexOf(b);
+                continue;
+            }
+        }
+        if(blogIndex > -1){
+            blogs.remove(blogIndex);
+        }
+        return true;
+    }
 
 }
